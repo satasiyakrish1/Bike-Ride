@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Motorcycle Tours | Category - Bike Trip</title>
+  <meta name="description"
+    content="Twist the throttle across Himalayan passes, desert dunes and coastal highways. Curated rides for riders who want the road, not the tour bus.">
+  <meta name="keywords"
+    content="motorcycle tours, himalayan rides, adventure motorcycle, bike tours india, desert rides, coastal highway rides">
+  <meta name="author" content="Bike Trip Team">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://localhost:8000/category.html">
+  <meta property="og:title" content="Motorcycle Tours | Bike Trip">
+  <meta property="og:description" content="Twist the throttle across Himalayan passes, desert dunes and coastal highways.">
+  <meta property="og:image" content="assets/adv_motorcycle.png">
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="index.css?v=6">
+  <style>
+    .cat-breadcrumb { display:flex; align-items:center; gap:8px; font-size:13px; color:rgba(255,255,255,0.55); margin-bottom:18px; }
+    .cat-breadcrumb a { color:rgba(255,255,255,0.55); text-decoration:none; transition:color 0.2s; }
+    .cat-breadcrumb a:hover { color:#f97316; }
+    .cat-breadcrumb .sep { color:rgba(255,255,255,0.3); font-size:11px; }
+    .cat-breadcrumb .current { color:#f97316; font-weight:500; display:flex; align-items:center; gap:6px; }
+    .breadcrumb-badge { background:#f97316; color:#fff; font-size:10px; font-weight:700; width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; }
+
+    .cat-hero-wrapper { position:relative; width:100%; height:260px; background:#0c0d0e; overflow:hidden; display:flex; align-items:stretch; }
+    .cat-hero-content { position:relative; z-index:5; display:flex; flex-direction:column; justify-content:center; padding:44px 6%; width:48%; flex-shrink:0; background:#0c0d0e; }
+    .cat-hero-title { font-family:'Playfair Display',serif; font-size:48px; font-weight:700; color:#ffffff; line-height:1.1; margin-bottom:14px; letter-spacing:-0.5px; }
+    .cat-hero-desc { font-size:15px; color:rgba(255,255,255,0.65); line-height:1.65; max-width:380px; font-weight:300; }
+    .cat-hero-image { flex:1; position:relative; overflow:hidden; }
+    .cat-hero-image img { width:100%; height:100%; object-fit:cover; object-position:center 30%; display:block; }
+    .cat-hero-image::before { content:''; position:absolute; inset:0; background:linear-gradient(to right, #0c0d0e 0%, transparent 35%); z-index:2; }
+
+    /* ── Layout ── */
+    .cat-body { background:#f5f5f7; padding:40px 5% 80px; }
+    .cat-layout { display:grid; grid-template-columns:260px 1fr; gap:28px; align-items:start; }
+
+    /* ── Sidebar ── */
+    .filter-sidebar { background:#fff; border-radius:16px; padding:24px; position:sticky; top:24px; box-shadow:0 2px 16px rgba(0,0,0,0.07); }
+    .filter-sidebar-title { font-size:18px; font-weight:700; color:#111; margin-bottom:20px; }
+    .filter-group { border-bottom:1px solid #f0f0f0; padding-bottom:18px; margin-bottom:18px; }
+    .filter-group:last-of-type { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+    .filter-group-header { display:flex; align-items:center; justify-content:space-between; cursor:pointer; margin-bottom:14px; }
+    .filter-group-header span { font-size:14px; font-weight:600; color:#222; }
+    .filter-group-header i { font-size:11px; color:#999; transition:transform 0.2s; }
+    .filter-group-header.collapsed i { transform:rotate(-90deg); }
+
+    /* Price Range */
+    .price-range-wrap { padding:0 4px; }
+    .price-range-track { position:relative; height:4px; background:#e5e7eb; border-radius:4px; margin:20px 0 10px; }
+    .price-range-fill { position:absolute; height:4px; background:#f97316; border-radius:4px; left:0; right:20%; }
+    .price-range-thumb { position:absolute; top:50%; transform:translateY(-50%); width:16px; height:16px; background:#f97316; border:2px solid #fff; border-radius:50%; box-shadow:0 2px 6px rgba(249,115,22,0.4); cursor:pointer; }
+    .price-range-thumb.left { left:0; }
+    .price-range-thumb.right { right:20%; }
+    input[type=range].price-slider { width:100%; accent-color:#f97316; cursor:pointer; }
+    .price-labels { display:flex; justify-content:space-between; font-size:12px; color:#666; margin-top:6px; }
+
+    /* Checkboxes */
+    .filter-option { display:flex; align-items:center; gap:10px; padding:5px 0; cursor:pointer; }
+    .filter-option input[type=checkbox] { width:16px; height:16px; accent-color:#f97316; cursor:pointer; }
+    .filter-option label { font-size:13.5px; color:#444; cursor:pointer; flex:1; }
+    .filter-option input:checked + label { color:#f97316; font-weight:600; }
+
+    /* Radio */
+    .filter-option input[type=radio] { width:16px; height:16px; accent-color:#f97316; cursor:pointer; }
+
+    /* Clear Filters */
+    .clear-filters-btn { width:100%; background:#f97316; border:none; color:#fff; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; padding:13px 0; border-radius:10px; cursor:pointer; margin-top:20px; transition:background 0.2s ease; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .clear-filters-btn:hover { background:#ea580c; }
+
+    /* ── Listing Panel ── */
+    .listing-panel {}
+    .listing-topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:22px; flex-wrap:wrap; gap:12px; }
+    .trips-count { font-size:14px; color:#666; font-weight:500; }
+    .trips-count strong { color:#111; }
+    .topbar-right { display:flex; align-items:center; gap:10px; }
+    .sort-select { background:#fff; border:1px solid #e0e0e0; color:#333; font-family:'Outfit',sans-serif; font-size:13.5px; padding:9px 36px 9px 14px; border-radius:10px; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%23666' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; font-weight:500; }
+    .sort-select:focus { outline:none; border-color:#f97316; }
+    .view-toggle { display:flex; gap:4px; }
+    .view-btn { width:34px; height:34px; border-radius:8px; border:1px solid #e0e0e0; background:#fff; color:#999; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; transition:all 0.2s; }
+    .view-btn.active, .view-btn:hover { background:#f97316; border-color:#f97316; color:#fff; }
+
+    /* ── Tour Cards ── */
+    .tours-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .tour-card { background:#fff; border:1px solid #ebebeb; border-radius:16px; overflow:hidden; transition:transform 0.3s ease, box-shadow 0.3s ease; cursor:pointer; display:flex; flex-direction:column; }
+    .tour-card:hover { transform:translateY(-5px); box-shadow:0 16px 40px rgba(0,0,0,0.12); }
+    .tour-card-img { position:relative; width:100%; height:190px; overflow:hidden; }
+    .tour-card-img img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; }
+    .tour-card:hover .tour-card-img img { transform:scale(1.06); }
+    .tour-card-img::after { content:''; position:absolute; bottom:0; left:0; right:0; height:50px; background:linear-gradient(to bottom,transparent,rgba(0,0,0,0.25)); }
+
+    /* Vehicle badge on image */
+    .vehicle-badge { position:absolute; top:12px; left:12px; font-size:11px; font-weight:700; padding:4px 10px; border-radius:100px; z-index:2; backdrop-filter:blur(6px); display:flex; align-items:center; gap:5px; }
+    .vehicle-badge.motorcycle { background:rgba(255,255,255,0.9); color:#f97316; border:1px solid rgba(249,115,22,0.3); }
+    .vehicle-badge.fourx4 { background:rgba(255,255,255,0.9); color:#6366f1; border:1px solid rgba(99,102,241,0.3); }
+
+    /* Rating badge on image */
+    .img-rating { position:absolute; top:12px; right:12px; background:rgba(255,255,255,0.92); border-radius:8px; padding:4px 8px; display:flex; align-items:center; gap:4px; font-size:12px; font-weight:700; color:#111; z-index:2; }
+    .img-rating i { color:#f97316; font-size:11px; }
+
+    .wishlist-btn { position:absolute; bottom:12px; right:12px; width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,0.9); border:none; color:#ccc; display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:14px; transition:all 0.25s ease; z-index:2; }
+    .wishlist-btn:hover, .wishlist-btn.active { background:#f97316; color:#fff; }
+
+    .tour-card-body { padding:16px 18px 18px; flex:1; display:flex; flex-direction:column; }
+    .tour-meta { display:flex; align-items:center; gap:14px; margin-bottom:8px; flex-wrap:wrap; }
+    .tour-meta-item { display:flex; align-items:center; gap:4px; font-size:12px; color:#888; }
+    .tour-meta-item i { color:#f97316; font-size:10px; }
+    .tour-name { font-family:'Playfair Display',serif; font-size:17px; font-weight:700; color:#111; margin-bottom:6px; line-height:1.3; transition:color 0.2s; }
+    .tour-card:hover .tour-name { color:#f97316; }
+    .tour-snippet { font-size:12.5px; color:#777; line-height:1.6; margin-bottom:14px; flex:1; }
+
+    /* Tags */
+    .tour-tags { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:14px; }
+    .tour-tag { font-size:11px; font-weight:600; padding:3px 10px; border-radius:100px; }
+    .tour-tag.easy { background:#dcfce7; color:#16a34a; }
+    .tour-tag.moderate { background:#fef9c3; color:#ca8a04; }
+    .tour-tag.challenging { background:#fee2e2; color:#dc2626; }
+    .tour-tag.guided { background:#e0f2fe; color:#0284c7; }
+    .tour-tag.self { background:#f3e8ff; color:#7c3aed; }
+
+    .tour-card-footer { display:flex; align-items:center; justify-content:space-between; padding-top:14px; border-top:1px solid #f3f3f3; gap:10px; }
+    .tour-price { display:flex; flex-direction:column; }
+    .price-label { font-size:10px; color:#aaa; margin-bottom:1px; text-transform:uppercase; letter-spacing:0.5px; }
+    .price-value { font-size:22px; font-weight:800; color:#111; line-height:1; }
+    .price-currency { font-size:14px; color:#f97316; font-weight:700; }
+    .view-btn-card { background:#f97316; border:none; color:#fff; font-family:'Outfit',sans-serif; font-size:13px; font-weight:600; padding:10px 18px; border-radius:10px; cursor:pointer; transition:background 0.2s ease,transform 0.2s ease; white-space:nowrap; display:flex; align-items:center; gap:6px; }
+    .view-btn-card:hover { background:#ea580c; transform:scale(1.03); }
+    .view-btn-card i { font-size:11px; }
+
+    /* ── Pagination ── */
+    .pagination-row { display:flex; justify-content:center; align-items:center; gap:8px; margin-top:40px; }
+    .page-btn { width:36px; height:36px; border-radius:8px; border:1px solid #e0e0e0; background:#fff; color:#555; font-size:14px; font-weight:500; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s; font-family:'Outfit',sans-serif; }
+    .page-btn:hover { border-color:#f97316; color:#f97316; }
+    .page-btn.active { background:#f97316; border-color:#f97316; color:#fff; font-weight:700; }
+    .page-btn.arrow { color:#999; }
+    .page-btn.arrow:hover { color:#f97316; }
+
+    /* ── CTA Banner ── */
+    .cta-banner { background:#1a1b1f; border-radius:20px; padding:44px 52px; display:flex; align-items:center; justify-content:space-between; gap:24px; margin-top:52px; flex-wrap:wrap; }
+    .cta-banner-text h2 { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:#fff; margin-bottom:8px; line-height:1.2; }
+    .cta-banner-text h2 span { color:#f97316; }
+    .cta-banner-text p { font-size:14px; color:rgba(255,255,255,0.5); line-height:1.6; max-width:400px; }
+    .cta-banner-actions { display:flex; flex-direction:column; gap:12px; }
+    .cta-btn-primary { display:inline-flex; align-items:center; gap:10px; background:#f97316; color:#fff; border:none; font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; padding:14px 28px; border-radius:10px; cursor:pointer; transition:background 0.2s,transform 0.2s; white-space:nowrap; }
+    .cta-btn-primary:hover { background:#ea580c; transform:scale(1.03); }
+    .cta-btn-secondary { display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,0.08); color:#fff; border:1px solid rgba(255,255,255,0.15); font-family:'Outfit',sans-serif; font-size:14px; font-weight:600; padding:14px 28px; border-radius:10px; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+    .cta-btn-secondary:hover { background:rgba(255,255,255,0.14); border-color:rgba(255,255,255,0.3); }
+    .cta-btn-secondary i { color:#25D366; }
+
+    @media (max-width:1100px) { .tours-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:900px) { .cat-layout { grid-template-columns:1fr; } .filter-sidebar { position:static; } }
+    @media (max-width:600px) { .tours-grid { grid-template-columns:1fr; } .cta-banner { padding:32px 24px; } .cta-banner-text h2 { font-size:24px; } }
+
+    .why-ride { background:#111214; border-top:1px solid rgba(255,255,255,0.06); padding:72px 6%; }
+    .section-label { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#f97316; margin-bottom:12px; }
+    .section-title { font-family:'Playfair Display',serif; font-size:38px; font-weight:700; color:#fff; margin-bottom:48px; max-width:500px; line-height:1.2; }
+    .perks-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:24px; }
+    .perk-card { background:#161719; border:1px solid rgba(255,255,255,0.07); border-radius:18px; padding:30px 24px; transition:border-color 0.25s,transform 0.25s; }
+    .perk-card:hover { border-color:rgba(249,115,22,0.3); transform:translateY(-4px); }
+    .perk-icon { width:48px; height:48px; background:rgba(249,115,22,0.12); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:20px; color:#f97316; margin-bottom:16px; }
+    .perk-title { font-size:17px; font-weight:600; color:#fff; margin-bottom:8px; }
+    .perk-desc { font-size:13.5px; color:rgba(255,255,255,0.45); line-height:1.6; }
+
+    .cat-nav-active { color:#f97316 !important; font-weight:600 !important; }
+
+    @media (max-width:1024px) { .tours-grid { grid-template-columns:repeat(2,1fr); } .tour-card.featured { grid-column:span 2; } .perks-grid { grid-template-columns:repeat(2,1fr); } }
+    @media (max-width:768px) { .cat-hero-wrapper { height:auto; flex-direction:column; } .cat-hero-content { width:100%; padding:36px 6%; } .cat-hero-image { height:200px; } .cat-hero-image::before { background:linear-gradient(to bottom,#0c0d0e 0%,transparent 30%); } .tours-grid { grid-template-columns:1fr; } .tour-card.featured { flex-direction:column; grid-column:span 1; } .tour-card.featured .tour-card-img { width:100%; height:220px; } .perks-grid { grid-template-columns:1fr 1fr; } .cat-hero-title { font-size:34px; } }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">
+      <svg width="280" height="73" viewBox="0 0 280 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M48.8211 71.5956C46.6257 72.0391 44.7301 72.4195 42.4812 72.6289C33.5437 73.46 25.0314 71.5564 17.5182 66.5767C9.27004 61.0792 3.54186 52.5328 1.59258 42.814C-0.343902 33.4171 1.55982 23.6361 6.8793 15.6514C12.2069 7.67786 20.3179 2.50478 29.6979 0.667551C39.0671 -1.16241 48.7795 0.80517 56.6978 6.1372C65.6749 12.1838 70.6274 21.4304 71.9621 32.0154C71.5777 31.2262 71.5129 29.6059 71.2764 28.6694C66.1544 8.36195 44.9619 -1.69594 25.9092 6.60592C17.0181 10.5413 10.0636 17.8602 6.5872 26.9407C5.76005 29.0519 5.28638 30.8827 4.74502 33.089C6.20815 31.1086 8.05769 29.3695 9.67219 27.522C11.0056 25.996 11.1423 26.2539 12.9407 25.8311C13.6276 25.0712 21.0432 19.2455 21.5099 19.1988C22.0853 19.543 24.5279 21.8724 25.1507 22.4967C26.4655 23.8146 28.434 25.4859 29.6318 26.8037C30.7542 26.0242 32.0323 25.3063 33.2407 24.6664C33.99 25.1332 36.2412 27.1752 37.0332 27.8491C38.4637 29.0565 39.8831 30.2759 41.292 31.5076C41.5909 31.7677 42.7226 32.7174 42.9 32.9426C40.6207 31.5366 38.1952 30.2703 35.9184 28.8369C35.1538 28.3557 34.2745 27.8854 33.5435 27.3771C34.1217 28.9567 34.8841 30.5813 35.6442 32.083C33.769 31.2543 31.5261 30.3333 29.7516 29.3614C29.355 29.1441 27.5013 27.3742 27.0133 26.923C25.206 25.2658 23.4104 23.5959 21.6268 21.9132C21.6473 22.857 21.7605 24.371 21.7285 25.231C21.3229 25.6267 20.9845 25.8562 20.525 26.186L25.572 31.2512C26.2765 31.9553 27.2643 33.0189 27.9871 33.6153C25.8499 32.5341 23.7535 31.3488 21.6356 30.2896C21.7165 31.1626 21.8978 32.6843 21.8893 33.5099C20.0256 32.4177 18.0043 31.2987 16.1144 30.2316C14.2934 32.2144 12.4831 34.2071 10.6837 36.2097C11.176 34.1154 11.6886 32.0261 12.2216 29.9418C9.6578 32.2108 6.88034 34.6793 4.26879 36.8864C3.72767 41.0558 4.57264 45.8301 5.70819 49.8323C9.55391 44.369 27.893 44.2164 34.1352 44.2045L34.0548 44.226C33.421 44.3902 32.0782 44.6251 31.4819 44.7376C23.6188 46.2218 15.3197 50.6614 26.304 56.9938C26.8925 57.3334 27.9934 57.8849 28.579 58.2637C27.9728 60.4007 27.7543 62.0925 28.1536 64.3031C23.9163 62.2228 18.8662 59.0301 16.1418 55.1341C11.9309 49.1118 20.3796 46.5848 24.6131 45.5467C24.9912 45.5172 26.6066 45.1317 27.0651 45.0273L27.101 44.9454L27.1519 45.001L27.0745 45.0224L27.0872 44.944C26.2882 44.9874 25.0457 45.205 24.2473 45.3388C20.2779 46.1929 11.7727 48.0127 13.2764 53.7491C14.432 58.1574 19.9837 61.8928 23.7134 64.1816C26.2835 65.7584 28.8094 66.6071 31.4682 67.845C29.8489 66.464 28.9515 64.8833 28.8765 62.7311C28.7314 58.5698 30.7225 53.3911 35.5563 53.5477C35.7633 52.9947 35.8776 52.7086 36.1533 52.1899C35.6387 51.7329 34.996 51.1922 34.5126 50.7181C33.9926 50.9307 33.7247 51.0556 33.2353 51.3293C32.7279 51.2582 31.9011 51.23 31.6043 50.8758C31.5728 50.5415 31.6422 50.6696 31.4335 50.4571C31.1526 50.4071 30.5366 50.3437 30.3592 50.1492C30.4011 49.8737 30.3571 50.007 30.5506 49.7541C30.9595 49.5592 31.4634 49.7205 31.9214 49.8062C32.2908 49.5563 32.6521 49.309 33.0327 49.0754C32.4618 48.1201 31.9851 47.3916 31.7645 46.2782C32.5004 46.2764 35.0288 46.1506 35.6498 46.6636C35.7042 46.7086 35.7521 46.9169 35.7713 46.9968C36.0071 47.5877 36.3204 47.8217 36.7799 48.2577C36.4626 47.7676 36.262 47.4365 35.9951 46.9198C35.8281 45.9198 35.924 44.7132 36.8063 44.0347C37.4888 43.5102 38.1145 43.6336 38.9049 43.7314L37.6086 43.2043C38.0945 41.16 40.2739 37.9185 41.9841 36.6425C42.6283 36.1623 43.5473 36.0326 44.3265 36.0392C44.822 36.0434 45.9712 36.4196 46.1438 35.9006C45.9401 35.5755 45.7882 35.3113 45.6084 34.9725C45.6523 33.7232 45.817 32.4441 46.7568 31.5074C48.5853 29.6854 51.8596 30.6192 52.9121 32.8425C53.3149 33.6939 53.378 34.1951 53.3756 35.0997C51.3681 34.9642 50.2916 34.289 48.6397 33.2779C48.8586 35.4022 49.5196 36.443 51.4256 37.4859C51.9267 37.3352 52.2903 37.1258 52.6108 37.6313C52.6659 38.3162 52.0402 39.0061 51.6246 39.5291C52.4509 40.8293 53.8943 42.0359 55.2177 42.8114C55.515 43.1068 56.8704 43.9136 57.2932 44.2409C57.8542 44.6758 58.4296 45.1344 59.0434 45.4847L59.045 45.4276C57.8734 44.3299 56.5475 43.3243 55.3344 42.2485C54.8725 41.8552 54.369 41.4428 53.927 41.0329C58.9251 38.9322 59.1433 40.7735 61.9268 44.5349C62.2249 44.9376 62.5126 45.3771 62.7907 45.7914C63.2342 45.5687 63.6946 45.3464 64.1253 45.1037C64.3227 43.7473 64.9277 43.353 66.4198 43.4703C67.1286 43.5261 67.6705 44.0476 67.3356 44.7591C66.8665 46.0118 65.655 45.8137 64.6088 45.5898C64.0654 45.9027 63.7865 46.0859 63.3573 46.5783C64.1485 47.8708 65.1842 49.3096 64.8262 50.8909C64.5009 52.328 63.4205 52.8229 62.4135 53.7316C59.5309 52.9388 57.8726 53.3224 55.2369 54.8208C55.0355 54.9335 54.8365 55.051 54.6399 55.1733C54.8013 56.4008 55.2073 58.9797 55.2273 60.0978C55.4678 60.2265 55.6253 60.2265 55.8842 60.1146C55.905 58.6529 55.4582 56.6877 55.4862 54.9847C58.1443 53.7683 60.9981 54.2366 63.7921 55.0158C64.0934 55.0997 64.5081 55.3962 64.7295 55.6312L64.7247 55.7495L64.7663 55.672L64.7839 55.6943C64.5201 55.8366 64.5753 55.5833 64.2308 55.7503C64.226 56.1347 64.7775 56.6989 64.9749 57.0601C67.3093 61.3054 65.8124 67.117 62.5493 70.4423C60.0551 72.9853 55.666 73.8333 53.0735 71.0042C49.9184 67.5613 50.7143 63.0803 52.2807 59.1819L51.6845 58.736C50.4059 61.6242 49.7657 64.1312 50.2532 67.3008C47.5136 67.1122 41.909 65.899 39.2581 65.0727C38.0897 67.0986 36.8055 68.255 34.4257 68.5499C38.6883 69.7295 44.4168 71.1153 48.8211 71.5956Z" fill="#FE6B01"/>
+        <path d="M88.175 60.6555V12.0176H98.4194C102.513 12.0176 105.502 12.8586 107.387 14.5407C109.272 16.2227 110.224 18.9991 110.244 22.8699C110.244 23.8021 110.244 24.6634 110.244 25.4538C110.244 26.2239 110.224 26.9839 110.184 27.7337C110.062 29.8008 109.606 31.4525 108.816 32.6887C108.046 33.9046 106.83 34.7862 105.168 35.3334V36.7317C106.89 37.2789 108.147 38.1706 108.937 39.4068C109.728 40.643 110.163 42.3352 110.244 44.4834C110.285 45.4359 110.305 46.3174 110.305 47.128C110.305 47.9387 110.285 48.8304 110.244 49.8031C110.082 53.6536 109.099 56.43 107.296 58.1324C105.492 59.8144 102.543 60.6555 98.4498 60.6555H88.175ZM96.0483 53.7246H98.4498C99.7265 53.7246 100.699 53.3902 101.368 52.7214C102.057 52.0324 102.402 51.0292 102.402 49.7119C102.422 48.8608 102.432 48.0501 102.432 47.28C102.432 46.4897 102.422 45.679 102.402 44.8481C102.402 42.8824 102.077 41.4942 101.429 40.6835C100.801 39.8526 99.7873 39.4372 98.389 39.4372H96.0483V53.7246ZM96.0483 32.5063H98.4194C99.7164 32.5063 100.699 32.0807 101.368 31.2295C102.037 30.3784 102.381 29.1422 102.402 27.5209C102.402 26.6495 102.402 25.8084 102.402 24.9978C102.402 24.1669 102.402 23.3259 102.402 22.4747C102.381 21.3196 102.037 20.4481 101.368 19.8604C100.699 19.2525 99.7164 18.9485 98.4194 18.9485H96.0483V32.5063Z" fill="white"/>
+        <path d="M114.829 18.3709V12.0176H123.249V18.3709H114.829ZM115.133 60.6555V24.177H122.976V60.6555H115.133Z" fill="white"/>
+        <path d="M128.343 60.6555V12.0176H135.669V22.2315L134.757 38.6772H136.003L138.648 31.1991L141.9 24.177H150.047L142.904 38.1604L151.294 60.6555H143.268L137.979 46.0641L135.821 49.6511V60.6555H128.343Z" fill="white"/>
+        <path d="M163.803 61.2026C160.013 61.2026 157.247 60.4325 155.504 58.8923C153.781 57.3521 152.819 54.8088 152.616 51.2623C152.575 50.33 152.545 49.0938 152.525 47.5536C152.504 45.9932 152.494 44.3314 152.494 42.5682C152.494 40.8051 152.504 39.1332 152.525 37.5525C152.545 35.9515 152.575 34.6646 152.616 33.6918C152.859 30.0643 153.832 27.4804 155.534 25.9402C157.257 24.4 159.983 23.6299 163.711 23.6299C167.42 23.6299 170.105 24.3898 171.767 25.9098C173.449 27.4094 174.371 29.9021 174.533 33.3878C174.554 33.8742 174.564 34.695 174.564 35.8501C174.584 36.985 174.584 38.2618 174.564 39.6804C174.564 41.099 174.533 42.4568 174.473 43.7538H160.368C160.368 45.1521 160.378 46.5505 160.398 47.9488C160.439 49.3269 160.469 50.705 160.489 52.083C160.53 53.2584 160.803 54.0893 161.31 54.5757C161.817 55.0621 162.647 55.3053 163.803 55.3053C164.856 55.3053 165.606 55.0621 166.052 54.5757C166.518 54.0893 166.782 53.2584 166.843 52.083C166.883 51.5156 166.903 50.786 166.903 49.8943C166.903 48.9824 166.883 47.9792 166.843 46.8849H174.473C174.513 47.2699 174.544 47.9184 174.564 48.8304C174.584 49.7423 174.574 50.553 174.533 51.2623C174.371 54.8088 173.459 57.3521 171.797 58.8923C170.156 60.4325 167.491 61.2026 163.803 61.2026ZM160.368 38.282H166.903C166.903 37.4106 166.903 36.5797 166.903 35.7893C166.903 34.9787 166.893 34.2897 166.873 33.7222C166.873 33.1345 166.863 32.7292 166.843 32.5063C166.782 31.4525 166.508 30.6925 166.022 30.2264C165.556 29.7603 164.786 29.5272 163.711 29.5272C162.577 29.5272 161.766 29.7603 161.28 30.2264C160.793 30.6925 160.53 31.4525 160.489 32.5063C160.469 33.4993 160.449 34.4721 160.428 35.4246C160.408 36.377 160.388 37.3295 160.368 38.282Z" fill="white"/>
+        <path d="M196.799 60.6555V18.9485H189.412V12.0176H212.059V18.9485H204.641V60.6555H196.799Z" fill="white"/>
+        <path d="M212.473 60.6555V24.177H220.316V28.4633H221.714C221.937 26.7812 222.464 25.6159 223.295 24.9674C224.146 24.2986 225.231 23.9643 226.548 23.9643C227.034 23.9643 227.5 23.9845 227.946 24.0251C228.412 24.0656 228.767 24.096 229.01 24.1162V30.1352H226.669C224.481 30.1352 222.93 30.4797 222.018 31.1687C221.127 31.8578 220.559 32.8305 220.316 34.087V60.6555H212.473Z" fill="white"/>
+        <path d="M231.971 18.3709V12.0176H240.391V18.3709H231.971ZM232.275 60.6555V24.177H240.118V60.6555H232.275Z" fill="white"/>
+        <path d="M245.484 72.8149V24.177H253.327V27.9465H254.482C255.273 26.5481 256.114 25.4842 257.005 24.7546C257.897 24.0048 259.235 23.6299 261.018 23.6299C263.389 23.6299 265.213 24.3594 266.49 25.8186C267.787 27.2777 268.516 29.7096 268.679 33.1143C268.719 34.1883 268.749 35.536 268.77 37.1573C268.79 38.7785 268.8 40.5011 268.8 42.3251C268.8 44.1287 268.79 45.8614 268.77 47.5232C268.749 49.185 268.719 50.5732 268.679 51.6878C268.516 55.0925 267.726 57.5345 266.307 59.0139C264.889 60.4731 262.984 61.2026 260.592 61.2026C259.295 61.2026 258.171 60.8784 257.218 60.2299C256.266 59.5611 255.354 58.4465 254.482 56.886H253.327V72.8149H245.484ZM257.431 55.4573C258.424 55.4573 259.225 55.2141 259.833 54.7277C260.44 54.2211 260.765 53.4307 260.805 52.3566C260.886 50.9177 260.947 49.3471 260.988 47.6448C261.028 45.9425 261.048 44.1996 261.048 42.4163C261.048 40.6329 261.028 38.89 260.988 37.1877C260.947 35.4854 260.886 33.9148 260.805 32.4759C260.765 31.4018 260.522 30.6216 260.076 30.1352C259.65 29.6285 258.941 29.3752 257.948 29.3752C257.056 29.3752 256.154 29.6285 255.242 30.1352C254.33 30.6418 253.692 31.3511 253.327 32.2631V52.5694C253.753 53.603 254.28 54.3427 254.908 54.7885C255.556 55.2344 256.397 55.4573 257.431 55.4573Z" fill="white"/>
+      </svg>
+    </div>
+    <div class="nav-right">
+      <nav class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="#" class="nav-link cat-nav-active">Tours</a>
+        <a href="#" class="nav-link">About</a>
+        <a href="#" class="nav-link">Blog</a>
+        <a href="#" class="nav-link">Contact Us</a>
+      </nav>
+      <button class="search-btn" id="searchBtn" aria-label="Search"><i class="fa-solid fa-magnifying-glass"></i></button>
+      <div class="lang-selector">
+        <i class="fa-solid fa-globe lang-icon"></i>
+        <span>English</span>
+        <i class="fa-solid fa-chevron-down chevron-icon"></i>
+      </div>
+    </div>
+  </header>
+
+  <!-- CATEGORY HERO -->
+  <section class="cat-hero-wrapper" aria-label="Motorcycle Tours">
+    <div class="cat-hero-content">
+      <div class="cat-breadcrumb">
+        <a href="index.html">Home</a>
+        <span class="sep"><i class="fa-solid fa-chevron-right"></i></span>
+        <span class="current">Category Page <span class="breadcrumb-badge">8</span></span>
+      </div>
+      <h1 class="cat-hero-title">Motorcycle Tours</h1>
+      <p class="cat-hero-desc">Twist the throttle across Himalayan passes, desert dunes and coastal highways. Curated rides for riders who want the road, not the tour bus.</p>
+    </div>
+    <div class="cat-hero-image">
+      <img src="assets/category-hero-bg.png" alt="Motorcycle rider overlooking a Himalayan valley" loading="eager">
+    </div>
+  </section>
+
+  <!-- PAGE BODY -->
+  <main class="cat-body">
+    <div class="cat-layout">
+
+      <!-- ══ LEFT SIDEBAR ══ -->
+      <aside class="filter-sidebar" id="filterSidebar">
+        <p class="filter-sidebar-title">Filter</p>
+
+        <!-- Price Range -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Price Range</span><i class="fa-solid fa-chevron-up"></i></div>
+          <div class="price-range-wrap">
+            <input type="range" class="price-slider" id="priceSlider" min="100" max="2000" value="1300" step="10">
+            <div class="price-labels"><span>$208</span><span id="priceMax">$1,300</span></div>
+          </div>
+        </div>
+
+        <!-- Destination -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Destination</span><i class="fa-solid fa-chevron-up"></i></div>
+          <label class="filter-option"><input type="checkbox" checked> <label>India</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Nepal</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Bhutan</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Thailand</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Sri Lanka</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Vietnam</label></label>
+        </div>
+
+        <!-- Days -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Days</span><i class="fa-solid fa-chevron-up"></i></div>
+          <label class="filter-option"><input type="checkbox"> <label>1–3 Days</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>4–6 Days</label></label>
+          <label class="filter-option"><input type="checkbox" checked> <label>7–9 Days</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>10–14 Days</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>15+ Days</label></label>
+        </div>
+
+        <!-- Difficulty -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Difficulty</span><i class="fa-solid fa-chevron-up"></i></div>
+          <label class="filter-option"><input type="checkbox" checked> <label>Easy</label></label>
+          <label class="filter-option"><input type="checkbox" checked> <label>Moderate</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Challenging</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Expert</label></label>
+        </div>
+
+        <!-- Season -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Season</span><i class="fa-solid fa-chevron-up"></i></div>
+          <label class="filter-option"><input type="checkbox"> <label>Spring (Mar–Apr)</label></label>
+          <label class="filter-option"><input type="checkbox" checked> <label>Summer (May–Jun)</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Monsoon (Jul–Sep)</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Autumn (Oct–Nov)</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Winter (Dec–Feb)</label></label>
+        </div>
+
+        <!-- Vehicle Type -->
+        <div class="filter-group">
+          <div class="filter-group-header"><span>By Vehicle Type</span><i class="fa-solid fa-chevron-up"></i></div>
+          <label class="filter-option"><input type="checkbox" checked> <label>Motorcycle</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>4x4 SUV</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Multi-Vehicle</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Self Ride</label></label>
+          <label class="filter-option"><input type="checkbox"> <label>Guided Tour</label></label>
+        </div>
+
+        <button class="clear-filters-btn" id="clearFiltersBtn">
+          <i class="fa-solid fa-xmark"></i> Clear Filters
+        </button>
+      </aside>
+
+      <!-- ══ RIGHT LISTING ══ -->
+      <div class="listing-panel">
+
+        <!-- Topbar -->
+        <div class="listing-topbar">
+          <p class="trips-count"><strong>128 Trips</strong></p>
+          <div class="topbar-right">
+            <div class="view-toggle">
+              <button class="view-btn active" id="gridViewBtn" aria-label="Grid view"><i class="fa-solid fa-grip"></i></button>
+              <button class="view-btn" id="listViewBtn" aria-label="List view"><i class="fa-solid fa-list"></i></button>
+            </div>
+            <select class="sort-select" id="sortSelect">
+              <option>Most popular</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Duration</option>
+              <option>Newest First</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tours Grid -->
+        <div class="tours-grid" id="toursGrid">
+
+          <!-- Card 1: Ladakh -->
+          <article class="tour-card" id="tour-ladakh">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.9 <span style="color:#aaa;font-weight:400">(388)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/spiti.png" alt="Ladakh Bike Adventure">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 8 Days / 9 Nights</span>
+              </div>
+              <h3 class="tour-name">Ladakh Bike Adventure</h3>
+              <p class="tour-snippet">Conquer iconic Himalayan passes, Pangong Lake, Nubra Valley and unforgettable mountain roads.</p>
+              <div class="tour-tags">
+                <span class="tour-tag easy">Easy</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>895</span>
+                </div>
+                <a href="detail.html" style="text-decoration: none;"><button class="view-btn-card" id="view-ladakh">View Details <i class="fa-solid fa-arrow-right"></i></button></a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 2: Spiti -->
+          <article class="tour-card" id="tour-spiti2">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.8 <span style="color:#aaa;font-weight:400">(214)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/adv_motorcycle.png" alt="Spiti Valley Expedition">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 9 Days / 8 Nights</span>
+              </div>
+              <h3 class="tour-name">Spiti Valley Expedition</h3>
+              <p class="tour-snippet">Explore dramatic mountain landscapes, remote villages, monasteries and winding Himalayan passes.</p>
+              <div class="tour-tags">
+                <span class="tour-tag moderate">Moderate</span>
+                <span class="tour-tag self">Self Ride</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>720</span>
+                </div>
+                <button class="view-btn-card" id="view-spiti2">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3: Bhutan -->
+          <article class="tour-card" id="tour-bhutan">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.9 <span style="color:#aaa;font-weight:400">(163)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/meghalaya.png" alt="Bhutan Motorcycle Tour">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 9 Days / 8 Nights</span>
+              </div>
+              <h3 class="tour-name">Bhutan Motorcycle Tour</h3>
+              <p class="tour-snippet">Ride through peaceful valleys, mountain passes, ancient monasteries, and vibrant Bhutanese culture.</p>
+              <div class="tour-tags">
+                <span class="tour-tag easy">Easy</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>980</span>
+                </div>
+                <button class="view-btn-card" id="view-bhutan">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 4: Dubai -->
+          <article class="tour-card" id="tour-dubai">
+            <div class="tour-card-img">
+              <span class="vehicle-badge fourx4"><i class="fa-solid fa-truck-monster"></i> 4x4</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.7 <span style="color:#aaa;font-weight:400">(136)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/jaisalmer.png" alt="Dubai Desert Safari 4x4">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 3 Days / 2 Nights</span>
+              </div>
+              <h3 class="tour-name">Dubai Desert Safari 4x4</h3>
+              <p class="tour-snippet">Experience golden dunes, desert camps, thrilling off-road dunes and extreme terrain highlights.</p>
+              <div class="tour-tags">
+                <span class="tour-tag easy">Easy</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>420</span>
+                </div>
+                <button class="view-btn-card" id="view-dubai">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 5: Sri Lanka -->
+          <article class="tour-card" id="tour-srilanka">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.8 <span style="color:#aaa;font-weight:400">(192)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/kerala.png" alt="Sri Lanka Coastal Ride">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 8 Days / 7 Nights</span>
+              </div>
+              <h3 class="tour-name">Sri Lanka Coastal Ride</h3>
+              <p class="tour-snippet">Cruise along scenic beaches, tea plantations, colonial towns and tropical landscapes.</p>
+              <div class="tour-tags">
+                <span class="tour-tag easy">Easy</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>640</span>
+                </div>
+                <button class="view-btn-card" id="view-srilanka">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 6: Thailand -->
+          <article class="tour-card" id="tour-thailand">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.9 <span style="color:#aaa;font-weight:400">(271)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/adv_multicountry.png" alt="Thailand Northern Loop">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 7 Days / 8 Nights</span>
+              </div>
+              <h3 class="tour-name">Thailand Northern Loop</h3>
+              <p class="tour-snippet">Ride through lush mountains, waterfalls, temples and Thailand's legendary winding roads.</p>
+              <div class="tour-tags">
+                <span class="tour-tag moderate">Moderate</span>
+                <span class="tour-tag self">Self Ride</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>860</span>
+                </div>
+                <button class="view-btn-card" id="view-thailand">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 7: Nepal -->
+          <article class="tour-card" id="tour-nepal">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.6 <span style="color:#aaa;font-weight:400">(74)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/adv_seasonal.png" alt="Nepal Himalayan Explorer">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 7 Days / 8 Nights</span>
+              </div>
+              <h3 class="tour-name">Nepal Himalayan Explorer</h3>
+              <p class="tour-snippet">Discover breathtaking Himalayan views, mountain villages and Nepal's iconic highways.</p>
+              <div class="tour-tags">
+                <span class="tour-tag challenging">Challenging</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>910</span>
+                </div>
+                <button class="view-btn-card" id="view-nepal">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 8: Vietnam -->
+          <article class="tour-card" id="tour-vietnam">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 4.6 <span style="color:#aaa;font-weight:400">(282)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/discover-bg.png" alt="Vietnam Highlands Tour">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 7 Days / 8 Nights</span>
+              </div>
+              <h3 class="tour-name">Vietnam Highlands Tour</h3>
+              <p class="tour-snippet">Ride through mountain passes, ethnic villages and breathtaking valleys.</p>
+              <div class="tour-tags">
+                <span class="tour-tag moderate">Moderate</span>
+                <span class="tour-tag self">Self Ride</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>780</span>
+                </div>
+                <button class="view-btn-card" id="view-vietnam">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 9: Kyrgyzstan -->
+          <article class="tour-card" id="tour-kyrgyzstan">
+            <div class="tour-card-img">
+              <span class="vehicle-badge motorcycle"><i class="fa-solid fa-motorcycle"></i> Motorcycle</span>
+              <div class="img-rating"><i class="fa-solid fa-star"></i> 5.0 <span style="color:#aaa;font-weight:400">(98)</span></div>
+              <button class="wishlist-btn" aria-label="Add to wishlist"><i class="fa-regular fa-heart"></i></button>
+              <img src="assets/adv_4x4.png" alt="Kyrgyzstan Silk Route Ride">
+            </div>
+            <div class="tour-card-body">
+              <div class="tour-meta">
+                <span class="tour-meta-item"><i class="fa-regular fa-clock"></i> 10 Days / 9 Nights</span>
+              </div>
+              <h3 class="tour-name">Kyrgyzstan Silk Route Ride</h3>
+              <p class="tour-snippet">Explore alpine lakes, endless grasslands, nomadic culture and thrilling off-road adventures.</p>
+              <div class="tour-tags">
+                <span class="tour-tag challenging">Challenging</span>
+                <span class="tour-tag guided">Guided</span>
+              </div>
+              <div class="tour-card-footer">
+                <div class="tour-price">
+                  <span class="price-label">From</span>
+                  <span class="price-value"><span class="price-currency">$</span>1,120</span>
+                </div>
+                <button class="view-btn-card" id="view-kyrgyzstan">View Details <i class="fa-solid fa-arrow-right"></i></button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination-row">
+          <button class="page-btn arrow" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+          <button class="page-btn active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <span style="color:#aaa;font-size:14px">…</span>
+          <button class="page-btn">4</button>
+          <button class="page-btn">5</button>
+          <button class="page-btn arrow" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <!-- CTA Banner -->
+        <div class="cta-banner">
+          <div class="cta-banner-text">
+            <h2>Can't find the <span>perfect trip?</span></h2>
+            <p>Tell us your dream route, dates and riding style — we'll build a custom expedition around it.</p>
+          </div>
+          <div class="cta-banner-actions">
+            <button class="cta-btn-primary" id="planCustomBtn"><i class="fa-solid fa-route"></i> Plan a custom trip</button>
+            <button class="cta-btn-secondary" id="whatsappBtn"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</button>
+          </div>
+        </div>
+
+      </div><!-- /.listing-panel -->
+    </div><!-- /.cat-layout -->
+  </main>
+
+  <!-- Footer Section -->
+  <footer class="footer-section">
+    <div class="footer-container">
+      <!-- Brand & Socials -->
+      <div class="footer-col footer-col-brand">
+        <div class="footer-logo">
+          <svg width="280" height="73" viewBox="0 0 280 73" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M48.8211 71.5956C46.6257 72.0391 44.7301 72.4195 42.4812 72.6289C33.5437 73.46 25.0314 71.5564 17.5182 66.5767C9.27004 61.0792 3.54186 52.5328 1.59258 42.814C-0.343902 33.4171 1.55982 23.6361 6.8793 15.6514C12.2069 7.67786 20.3179 2.50478 29.6979 0.667551C39.0671 -1.16241 48.7795 0.80517 56.6978 6.1372C65.6749 12.1838 70.6274 21.4304 71.9621 32.0154C71.5777 31.2262 71.5129 29.6059 71.2764 28.6694C66.1544 8.36195 44.9619 -1.69594 25.9092 6.60592C17.0181 10.5413 10.0636 17.8602 6.5872 26.9407C5.76005 29.0519 5.28638 30.8827 4.74502 33.089C6.20815 31.1086 8.05769 29.3695 9.67219 27.522C11.0056 25.996 11.1423 26.2539 12.9407 25.8311C13.6276 25.0712 21.0432 19.2455 21.5099 19.1988C22.0853 19.543 24.5279 21.8724 25.1507 22.4967C26.4655 23.8146 28.434 25.4859 29.6318 26.8037C30.7542 26.0242 32.0323 25.3063 33.2407 24.6664C33.99 25.1332 36.2412 27.1752 37.0332 27.8491C38.4637 29.0565 39.8831 30.2759 41.292 31.5076C41.5909 31.7677 42.7226 32.7174 42.9 32.9426C40.6207 31.5366 38.1952 30.2703 35.9184 28.8369C35.1538 28.3557 34.2745 27.8854 33.5435 27.3771C34.1217 28.9567 34.8841 30.5813 35.6442 32.083C33.769 31.2543 31.5261 30.3333 29.7516 29.3614C29.355 29.1441 27.5013 27.3742 27.0133 26.923C25.206 25.2658 23.4104 23.5959 21.6268 21.9132C21.6473 22.857 21.7605 24.371 21.7285 25.231C21.3229 25.6267 20.9845 25.8562 20.525 26.186L25.572 31.2512C26.2765 31.9553 27.2643 33.0189 27.9871 33.6153C25.8499 32.5341 23.7535 31.3488 21.6356 30.2896C21.7165 31.1626 21.8978 32.6843 21.8893 33.5099C20.0256 32.4177 18.0043 31.2987 16.1144 30.2316C14.2934 32.2144 12.4831 34.2071 10.6837 36.2097C11.176 34.1154 11.6886 32.0261 12.2216 29.9418C9.6578 32.2108 6.88034 34.6793 4.26879 36.8864C3.72767 41.0558 4.57264 45.8301 5.70819 49.8323C9.55391 44.369 27.893 44.2164 34.1352 44.2045L34.0548 44.226C33.421 44.3902 32.0782 44.6251 31.4819 44.7376C23.6188 46.2218 15.3197 50.6614 26.304 56.9938C26.8925 57.3334 27.9934 57.8849 28.579 58.2637C27.9728 60.4007 27.7543 62.0925 28.1536 64.3031C23.9163 62.2228 18.8662 59.0301 16.1418 55.1341C11.9309 49.1118 20.3796 46.5848 24.6131 45.5467C24.9912 45.5172 26.6066 45.1317 27.0651 45.0273L27.101 44.9454L27.1519 45.001L27.0745 45.0224L27.0872 44.944C26.2882 44.9874 25.0457 45.205 24.2473 45.3388C20.2779 46.1929 11.7727 48.0127 13.2764 53.7491C14.432 58.1574 19.9837 61.8928 23.7134 64.1816C26.2835 65.7584 28.8094 66.6071 31.4682 67.845C29.8489 66.464 28.9515 64.8833 28.8765 62.7311C28.7314 58.5698 30.7225 53.3911 35.5563 53.5477C35.7633 52.9947 35.8776 52.7086 36.1533 52.1899C35.6387 51.7329 34.996 51.1922 34.5126 50.7181C33.9926 50.9307 33.7247 51.0556 33.2353 51.3293C32.7279 51.2582 31.9011 51.23 31.6043 50.8758C31.5728 50.5415 31.6422 50.6696 31.4335 50.4571C31.1526 50.4071 30.5366 50.3437 30.3592 50.1492C30.4011 49.8737 30.3571 50.007 30.5506 49.7541C30.9595 49.5592 31.4634 49.7205 31.9214 49.8062C32.2908 49.5563 32.6521 49.309 33.0327 49.0754C32.4618 48.1201 31.9851 47.3916 31.7645 46.2782C32.5004 46.2764 35.0288 46.1506 35.6498 46.6636C35.7042 46.7086 35.7521 46.9169 35.7713 46.9968C36.0071 47.5877 36.3204 47.8217 36.7799 48.2577C36.4626 47.7676 36.262 47.4365 35.9951 46.9198C35.8281 45.9198 35.924 44.7132 36.8063 44.0347C37.4888 43.5102 38.1145 43.6336 38.9049 43.7314L37.6086 43.2043C38.0945 41.16 40.2739 37.9185 41.9841 36.6425C42.6283 36.1623 43.5473 36.0326 44.3265 36.0392C44.822 36.0434 45.9712 36.4196 46.1438 35.9006C45.9401 35.5755 45.7882 35.3113 45.6084 34.9725C45.6523 33.7232 45.817 32.4441 46.7568 31.5074C48.5853 29.6854 51.8596 30.6192 52.9121 32.8425C53.3149 33.6939 53.378 34.1951 53.3756 35.0997C51.3681 34.9642 50.2916 34.289 48.6397 33.2779C48.8586 35.4022 49.5196 36.443 51.4256 37.4859C51.9267 37.3352 52.2903 37.1258 52.6108 37.6313C52.6659 38.3162 52.0402 39.0061 51.6246 39.5291C52.4509 40.8293 53.8943 42.0359 55.2177 42.8114C55.515 43.1068 56.8704 43.9136 57.2932 44.2409C57.8542 44.6758 58.4296 45.1344 59.0434 45.4847L59.045 45.4276C57.8734 44.3299 56.5475 43.3243 55.3344 42.2485C54.8725 41.8552 54.369 41.4428 53.927 41.0329C58.9251 38.9322 59.1433 40.7735 61.9268 44.5349C62.2249 44.9376 62.5126 45.3771 62.7907 45.7914C63.2342 45.5687 63.6946 45.3464 64.1253 45.1037C64.3227 43.7473 64.9277 43.353 66.4198 43.4703C67.1286 43.5261 67.6705 44.0476 67.3356 44.7591C66.8665 46.0118 65.655 45.8137 64.6088 45.5898C64.0654 45.9027 63.7865 46.0859 63.3573 46.5783C64.1485 47.8708 65.1842 49.3096 64.8262 50.8909C64.5009 52.328 63.4205 52.8229 62.4135 53.7316C59.5309 52.9388 57.8726 53.3224 55.2369 54.8208C55.0355 54.9335 54.8365 55.051 54.6399 55.1733C54.8013 56.4008 55.2073 58.9797 55.2273 60.0978C55.4678 60.2265 55.6253 60.2265 55.8842 60.1146C55.905 58.6529 55.4582 56.6877 55.4862 54.9847C58.1443 53.7683 60.9981 54.2366 63.7921 55.0158C64.0934 55.0997 64.5081 55.3962 64.7295 55.6312L64.7247 55.7495L64.7663 55.672L64.7839 55.6943C64.5201 55.8366 64.5753 55.5833 64.2308 55.7503C64.226 56.1347 64.7775 56.6989 64.9749 57.0601C67.3093 61.3054 65.8124 67.117 62.5493 70.4423C60.0551 72.9853 55.666 73.8333 53.0735 71.0042C49.9184 67.5613 50.7143 63.0803 52.2807 59.1819L51.6845 58.736C50.4059 61.6242 49.7657 64.1312 50.2532 67.3008C47.5136 67.1122 41.909 65.899 39.2581 65.0727C38.0897 67.0986 36.8055 68.255 34.4257 68.5499C38.6883 69.7295 44.4168 71.1153 48.8211 71.5956ZM55.4686 67.6604C56.2023 67.6412 56.5899 67.6236 57.2516 67.2209C59.8745 65.6241 61.1132 60.4462 58.2482 58.5458L58.0396 59.9196C60.1382 62.4002 57.5033 67.6077 54.89 65.7696C54.5959 65.4235 54.5336 65.3132 54.3682 64.9248C54.2307 64.6004 54.2635 63.4839 53.9454 63.4392C51.7756 63.1339 53.8535 60.7843 53.7065 60.0419L53.565 59.9148C53.3516 59.9571 53.2054 60.0267 53.1023 60.2449C51.8779 62.8174 51.4712 68.0784 54.4305 69.7543C55.2425 70.2202 56.2111 70.3321 57.1078 70.0611C61.3458 68.8208 63.8528 61.4332 61.361 57.7019C60.6961 56.7053 59.8673 56.3457 58.7405 56.0955C58.7373 56.1778 58.6957 56.4975 58.7676 56.5343C60.8279 57.5988 61.4769 59.4928 61.4569 61.7313C61.4345 64.1632 59.9952 68.1887 56.9991 68.1463C56.4221 68.1375 55.9753 67.9066 55.4686 67.6604ZM51.018 40.5516C50.1901 40.6017 49.9319 40.6191 49.1136 40.3524C48.3528 41.2056 47.6719 41.6639 46.6793 42.2394C46.8791 42.353 47.4009 42.6566 47.5504 42.692C48.5989 42.9404 49.4444 42.5979 50.0127 43.7313C50.0374 43.7808 50.7271 43.6606 50.8654 43.6591C51.1571 42.8901 51.9842 43.0766 52.7003 43.0829C52.4286 42.8109 51.9882 42.4376 51.8691 42.1014C51.9131 41.7313 52.0298 41.7434 52.3542 41.5634C51.8699 41.156 51.5551 40.8793 51.018 40.5516ZM53.5946 51.0981C51.1467 51.6221 49.4301 52.544 47.9796 54.6874C46.5626 56.7804 45.98 59.9923 46.5402 62.4586C46.5642 62.5609 46.5906 62.6624 46.6194 62.7639C46.6273 62.7159 46.6345 62.668 46.6417 62.6208C46.724 61.9127 46.5698 60.9417 46.6617 60.248C47.0565 57.2791 48.5789 54.5315 50.9413 52.6806C51.7437 52.0525 52.6092 51.6153 53.5354 51.2123C53.6297 51.1712 53.6034 51.2053 53.6185 51.1067L53.5946 51.0981ZM41.5022 46.6823C41.7052 46.5199 42.0113 46.2067 42.1855 46.0836C43.1493 45.4031 44.9043 45.5839 46 45.8466C46.6833 46.002 47.3914 46.1741 48.0755 46.3127C47.2923 45.9156 46.5067 45.7246 46 45.1191C45.3079 44.9342 44.0244 44.675 43.2732 44.5339C42.327 45.2903 42.0377 45.5772 41.5022 46.6823ZM53.9894 50.3451C52.8577 49.3857 50.421 48.0115 49.0888 47.3259C49.6187 47.1353 50.0478 46.9468 50.5625 46.7166C44.9203 47.4181 42.0497 48.6449 39.5746 54.0225C39.2246 54.5635 38.8282 55.3819 38.6212 55.9932C39.0511 55.3443 39.4068 54.7521 39.7992 54.084C41.2177 51.778 43.4634 49.5174 46.0391 48.6238C46.5027 48.4631 47.2051 48.209 47.6838 48.2495C49.7449 48.4241 52.1544 49.5278 53.9894 50.3451ZM41.3464 41.059C41.0978 42.5592 40.6982 43.6866 42.458 44.2608C42.3629 43.9082 41.7588 43.8138 41.5246 43.2213C41.2537 42.5348 41.4767 41.6287 41.3464 41.059ZM33.6004 57.5772C33.721 57.3318 34.3861 56.1459 34.3557 56.0476L34.2859 56.042C33.8206 56.1523 33.2896 56.2681 32.8658 56.5047C30.769 57.6763 29.9806 61.1847 30.4761 63.3768C30.8931 65.2221 32.2524 66.4712 34.069 65.1902C34.4936 64.9696 34.9036 64.4102 35.2225 64.0242C34.2714 64.1312 34.0718 63.9235 33.1817 63.6198C32.8622 63.5111 32.4011 63.6182 32.1218 63.3736C30.7541 62.2907 31.1879 59.6231 32.1821 58.4347C32.626 57.9041 32.9694 57.7546 33.6004 57.5772ZM55.3823 46.1506C56.2478 50.4843 58.5303 50.2105 62.1042 51.524C61.3682 49.264 60.5234 48.4381 58.3665 47.3032C57.6368 46.9191 56.1847 46.3264 55.3823 46.1506Z"
+              fill="#FE6B01" />
+            <path
+              d="M88.175 60.6555V12.0176H98.4194C102.513 12.0176 105.502 12.8586 107.387 14.5407C109.272 16.2227 110.224 18.9991 110.244 22.8699C110.244 23.8021 110.244 24.6634 110.244 25.4538C110.244 26.2239 110.224 26.9839 110.184 27.7337C110.062 29.8008 109.606 31.4525 108.816 32.6887C108.046 33.9046 106.83 34.7862 105.168 35.3334V36.7317C106.89 37.2789 108.147 38.1706 108.937 39.4068C109.728 40.643 110.163 42.3352 110.244 44.4834C110.285 45.4359 110.305 46.3174 110.305 47.128C110.305 47.9387 110.285 48.8304 110.244 49.8031C110.082 53.6536 109.099 56.43 107.296 58.1324C105.492 59.8144 102.543 60.6555 98.4498 60.6555H88.175ZM96.0483 53.7246H98.4498C99.7265 53.7246 100.699 53.3902 101.368 52.7214C102.057 52.0324 102.402 51.0292 102.402 49.7119C102.422 48.8608 102.432 48.0501 102.432 47.28C102.432 46.4897 102.422 45.679 102.402 44.8481C102.402 42.8824 102.077 41.4942 101.429 40.6835C100.801 39.8526 99.7873 39.4372 98.389 39.4372H96.0483V53.7246ZM96.0483 32.5063H98.4194C99.7164 32.5063 100.699 32.0807 101.368 31.2295C102.037 30.3784 102.381 29.1422 102.402 27.5209C102.402 26.6495 102.402 25.8084 102.402 24.9978C102.402 24.1669 102.402 23.3259 102.402 22.4747C102.381 21.3196 102.037 20.4481 101.368 19.8604C100.699 19.2525 99.7164 18.9485 98.4194 18.9485H96.0483V32.5063Z"
+              fill="white" />
+            <path d="M114.829 18.3709V12.0176H123.249V18.3709H114.829ZM115.133 60.6555V24.177H122.976V60.6555H115.133Z"
+              fill="white" />
+            <path
+              d="M128.343 60.6555V12.0176H135.669V22.2315L134.757 38.6772H136.003L138.648 31.1991L141.9 24.177H150.047L142.904 38.1604L151.294 60.6555H143.268L137.979 46.0641L135.821 49.6511V60.6555H128.343Z"
+              fill="white" />
+            <path
+              d="M163.803 61.2026C160.013 61.2026 157.247 60.4325 155.504 58.8923C153.781 57.3521 152.819 54.8088 152.616 51.2623C152.575 50.33 152.545 49.0938 152.525 47.5536C152.504 45.9932 152.494 44.3314 152.494 42.5682C152.494 40.8051 152.504 39.1332 152.525 37.5525C152.545 35.9515 152.575 34.6646 152.616 33.6918C152.859 30.0643 153.832 27.4804 155.534 25.9402C157.257 24.4 159.983 23.6299 163.711 23.6299C167.42 23.6299 170.105 24.3898 171.767 25.9098C173.449 27.4094 174.371 29.9021 174.533 33.3878C174.554 33.8742 174.564 34.695 174.564 35.8501C174.584 36.985 174.584 38.2618 174.564 39.6804C174.564 41.099 174.533 42.4568 174.473 43.7538H160.368C160.368 45.1521 160.378 46.5505 160.398 47.9488C160.439 49.3269 160.469 50.705 160.489 52.083C160.53 53.2584 160.803 54.0893 161.31 54.5757C161.817 55.0621 162.647 55.3053 163.803 55.3053C164.856 55.3053 165.606 55.0621 166.052 54.5757C166.518 54.0893 166.782 53.2584 166.843 52.083C166.883 51.5156 166.903 50.786 166.903 49.8943C166.903 48.9824 166.883 47.9792 166.843 46.8849H174.473C174.513 47.2699 174.544 47.9184 174.564 48.8304C174.584 49.7423 174.574 50.553 174.533 51.2623C174.371 54.8088 173.459 57.3521 171.797 58.8923C170.156 60.4325 167.491 61.2026 163.803 61.2026ZM160.368 38.282H166.903C166.903 37.4106 166.903 36.5797 166.903 35.7893C166.903 34.9787 166.893 34.2897 166.873 33.7222C166.873 33.1345 166.863 32.7292 166.843 32.5063C166.782 31.4525 166.508 30.6925 166.022 30.2264C165.556 29.7603 164.786 29.5272 163.711 29.5272C162.577 29.5272 161.766 29.7603 161.28 30.2264C160.793 30.6925 160.53 31.4525 160.489 32.5063C160.469 33.4993 160.449 34.4721 160.428 35.4246C160.408 36.377 160.388 37.3295 160.368 38.282Z"
+              fill="white" />
+            <path d="M196.799 60.6555V18.9485H189.412V12.0176H212.059V18.9485H204.641V60.6555H196.799Z" fill="white" />
+            <path
+              d="M212.473 60.6555V24.177H220.316V28.4633H221.714C221.937 26.7812 222.464 25.6159 223.295 24.9674C224.146 24.2986 225.231 23.9643 226.548 23.9643C227.034 23.9643 227.5 23.9845 227.946 24.0251C228.412 24.0656 228.767 24.096 229.01 24.1162V30.1352H226.669C224.481 30.1352 222.93 30.4797 222.018 31.1687C221.127 31.8578 220.559 32.8305 220.316 34.087V60.6555H212.473Z"
+              fill="white" />
+            <path d="M231.971 18.3709V12.0176H240.391V18.3709H231.971ZM232.275 60.6555V24.177H240.118V60.6555H232.275Z"
+              fill="white" />
+            <path
+              d="M245.484 72.8149V24.177H253.327V27.9465H254.482C255.273 26.5481 256.114 25.4842 257.005 24.7546C257.897 24.0048 259.235 23.6299 261.018 23.6299C263.389 23.6299 265.213 24.3594 266.49 25.8186C267.787 27.2777 268.516 29.7096 268.679 33.1143C268.719 34.1883 268.749 35.536 268.77 37.1573C268.79 38.7785 268.8 40.5011 268.8 42.3251C268.8 44.1287 268.79 45.8614 268.77 47.5232C268.749 49.185 268.719 50.5732 268.679 51.6878C268.516 55.0925 267.726 57.5345 266.307 59.0139C264.889 60.4731 262.984 61.2026 260.592 61.2026C259.295 61.2026 258.171 60.8784 257.218 60.2299C256.266 59.5611 255.354 58.4465 254.482 56.886H253.327V72.8149H245.484ZM257.431 55.4573C258.424 55.4573 259.225 55.2141 259.833 54.7277C260.44 54.2211 260.765 53.4307 260.805 52.3566C260.886 50.9177 260.947 49.3471 260.988 47.6448C261.028 45.9425 261.048 44.1996 261.048 42.4163C261.048 40.6329 261.028 38.89 260.988 37.1877C260.947 35.4854 260.886 33.9148 260.805 32.4759C260.765 31.4018 260.522 30.6216 260.076 30.1352C259.65 29.6285 258.941 29.3752 257.948 29.3752C257.056 29.3752 256.154 29.6285 255.242 30.1352C254.33 30.6418 253.692 31.3511 253.327 32.2631V52.5694C253.753 53.603 254.28 54.3427 254.908 54.7885C255.556 55.2344 256.397 55.4573 257.431 55.4573Z"
+              fill="white" />
+          </svg>
+        </div>
+        <div class="footer-socials">
+          <a href="#" class="social-icon-btn" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="#" class="social-icon-btn" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        </div>
+      </div>
+
+      <!-- Trips Plan -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Trips Plan</h3>
+        <ul class="footer-links">
+          <li><a href="#">Motorcycle Tours</a></li>
+          <li><a href="#">4x4 Adventures</a></li>
+          <li><a href="#">Multi-Country Expeditions</a></li>
+          <li><a href="#">Seasonal Trips</a></li>
+        </ul>
+      </div>
+
+      <!-- About -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">About</h3>
+        <ul class="footer-links">
+          <li><a href="#">Contacts</a></li>
+          <li><a href="#">About us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Our Team</a></li>
+        </ul>
+      </div>
+
+      <!-- Adventure -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Adventure</h3>
+        <ul class="footer-links">
+          <li><a href="#">Terms of use</a></li>
+          <li><a href="#">Privacy policy</a></li>
+          <li><a href="#">Log in</a></li>
+        </ul>
+      </div>
+
+      <!-- Download App -->
+      <div class="footer-col">
+        <h3 class="footer-col-title">Download App</h3>
+        <ul class="footer-links footer-download-links">
+          <li>
+            <a href="#" class="download-link">
+              <i class="fa-brands fa-google-play download-icon"></i>
+              <span>Google Play</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="download-link">
+              <i class="fa-brands fa-apple download-icon"></i>
+              <span>Apple Store</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" class="download-link">
+              <i class="fa-solid fa-desktop download-icon"></i>
+              <span>Desktop</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Price slider
+    const slider = document.getElementById('priceSlider');
+    if(slider) slider.addEventListener('input', () => {
+      document.getElementById('priceMax').textContent = '$' + Number(slider.value).toLocaleString();
+    });
+
+    // Wishlist toggle
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        e.stopPropagation();
+        const icon = btn.querySelector('i');
+        icon.classList.toggle('fa-regular');
+        icon.classList.toggle('fa-solid');
+        btn.classList.toggle('active');
+      });
+    });
+
+    // View toggle
+    const gridBtn = document.getElementById('gridViewBtn');
+    const listBtn = document.getElementById('listViewBtn');
+    const grid = document.getElementById('toursGrid');
+    if(gridBtn && listBtn && grid){
+      gridBtn.addEventListener('click',()=>{
+        gridBtn.classList.add('active'); listBtn.classList.remove('active');
+        grid.style.gridTemplateColumns='repeat(3,1fr)';
+      });
+      listBtn.addEventListener('click',()=>{
+        listBtn.classList.add('active'); gridBtn.classList.remove('active');
+        grid.style.gridTemplateColumns='1fr';
+      });
+    }
+
+    // Pagination
+    document.querySelectorAll('.page-btn:not(.arrow)').forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        document.querySelectorAll('.page-btn:not(.arrow)').forEach(b=>b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+
+    // Filter group collapse
+    document.querySelectorAll('.filter-group-header').forEach(h=>{
+      h.addEventListener('click',()=>{
+        h.classList.toggle('collapsed');
+        const group = h.closest('.filter-group');
+        const items = group.querySelectorAll('.filter-option, .price-range-wrap');
+        items.forEach(el=>el.style.display = h.classList.contains('collapsed') ? 'none' : '');
+      });
+    });
+
+    // Clear filters
+    document.getElementById('clearFiltersBtn')?.addEventListener('click',()=>{
+      document.querySelectorAll('.filter-sidebar input[type=checkbox]').forEach(c=>c.checked=false);
+      document.querySelectorAll('.filter-sidebar input[type=radio]').forEach(r=>r.checked=false);
+      if(slider){ slider.value=1300; document.getElementById('priceMax').textContent='$1,300'; }
+    });
+  </script>
+
+</body>
+</html>

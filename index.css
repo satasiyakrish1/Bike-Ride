@@ -1827,7 +1827,7 @@ body {
 /* Footer Section */
 .footer-section {
   background-color: #0c0d0e;
-  padding: 80px 6% 60px 6%;
+  padding: 40px 0;
   color: #ffffff;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
@@ -1835,6 +1835,7 @@ body {
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
+  padding: 0 24px;
   display: flex;
   justify-content: space-between;
   gap: 48px;
