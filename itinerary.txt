@@ -1,0 +1,161 @@
+﻿    <!-- Day-by-Day Itinerary Section -->
+    <div class="itinerary-section">
+      <div class="itinerary-section-header">
+        <h2 class="itinerary-section-title">Your Day-by-Day <span>Adventure Itinerary</span></h2>
+        <p class="itinerary-section-subtitle">Discover each day's route, breathtaking destinations, exciting activities,
+          comfortable stays, and unforgettable experiences as you journey through the majestic landscapes of Ladakh.</p>
+      </div>
+
+      <div class="itinerary-accordion-container">
+        <!-- Day 1 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -1</span>
+              <span class="day-title">Arrival in Leh</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Land at Leh airport (3,500m) and transfer to your hotel. Today is strictly reserved for rest and
+              acclimatization to the high altitude. In the evening, attend a trip briefing, meet your fellow riders, and
+              get assigned your Royal Enfield Himalayan bikes for a short test ride.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-hotel"></i> Stay: Leh Hotel</span>
+              <span><i class="fa-solid fa-utensils"></i> Meals: Dinner</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 2 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -2</span>
+              <span class="day-title">Leh &rarr; Nubra Valley</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Conquer the legendary Khardung La pass, historically celebrated as one of the highest motorable roads in
+              the world. Enjoy steep switchbacks and snow-capped mountain views before descending into the dramatic sand
+              dunes of Nubra Valley.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-road"></i> Distance: 125 km</span>
+              <span><i class="fa-solid fa-campground"></i> Stay: Luxury Desert Camp</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 3 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -3</span>
+              <span class="day-title">Nubra Valley &rarr; Pangong Lake</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Ride alongside the rugged Shyok River basin. The road features dirt tracks, rocky river beds, and fast
+              asphalt stretches, culminating in your first breathtaking sight of the deep-blue Pangong Lake spanning
+              across the border.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-road"></i> Distance: 140 km</span>
+              <span><i class="fa-solid fa-campground"></i> Stay: Lake View Cottages</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 4 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -4</span>
+              <span class="day-title">Pangong Lake &rarr; Hanle</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Ride through the remote Changthang region to Hanle, home to one of the world's highest optical
+              observatories. Enjoy raw trails, vast wetlands, and starry skies.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-road"></i> Distance: 160 km</span>
+              <span><i class="fa-solid fa-hotel"></i> Stay: Guest House / Homestay</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 5 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -5</span>
+              <span class="day-title">Hanle &rarr; Tso Moriri</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Ride from Hanle to the high-altitude lake of Tso Moriri. Enjoy dirt trails, dusty gravel sections, and
+              breathtaking lake vistas at 4,500 meters.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-road"></i> Distance: 140 km</span>
+              <span><i class="fa-solid fa-campground"></i> Stay: Lakeside Tents</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 6 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -6</span>
+              <span class="day-title">Tso Moriri &rarr; Leh</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Return to Leh via the scenic Indus river gorge and the Tanglang La pass. Celebrate your last night in Leh
+              with a warm farewell dinner.</p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-road"></i> Distance: 220 km</span>
+              <span><i class="fa-solid fa-hotel"></i> Stay: Leh Hotel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Day 7 -->
+        <div class="itinerary-item">
+          <div class="itinerary-row-header">
+            <div class="itinerary-row-left">
+              <span class="day-badge">Day -7</span>
+              <span class="day-title">Departure</span>
+            </div>
+            <div class="itinerary-toggle-icon">
+              <i class="fa-solid fa-chevron-down"></i>
+            </div>
+          </div>
+          <div class="itinerary-row-content">
+            <p>Transfer to Leh airport for your flight back home, carrying lifetime memories of the Ladakh Adventure.
+            </p>
+            <div class="itinerary-details-row">
+              <span><i class="fa-solid fa-plane-departure"></i> Airport Drop</span>
+              <span><i class="fa-solid fa-check-double"></i> End of Tour</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+

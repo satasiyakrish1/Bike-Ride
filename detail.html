@@ -28,7 +28,7 @@
       position: relative;
       width: 100%;
       min-height: 85vh;
-      background: linear-gradient(to bottom, rgba(12, 13, 14, 0.4) 0%, rgba(12, 13, 14, 0.8) 100%), url('assets/ladakh-hero-bg.png') no-repeat center center;
+      background: linear-gradient(to bottom, rgba(12, 13, 14, 0.1) 0%, rgba(12, 13, 14, 0.5) 100%), url('assets/ladakh-hero-bg.png') no-repeat center center;
       background-size: cover;
       display: flex;
       flex-direction: column;
@@ -231,7 +231,7 @@
     }
 
     .trip-desc-text {
-      font-size: 15px;
+      font-size: 16px;
       color: #555860;
       line-height: 1.75;
       margin-bottom: 20px;
@@ -271,8 +271,7 @@
       padding: 40px 32px;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
       border: 1px solid #ebebeb;
-      position: sticky;
-      top: 120px;
+      margin-top: 40px;
     }
 
     .price-row {
@@ -2081,6 +2080,38 @@
           <i class="fa-solid fa-star"></i>
           <span class="rating-text">4.7 <span class="rating-count">(650 Review)</span></span>
         </div>
+        </div>
+
+        <!-- Route Map Section (Moved to left) -->
+        <div class="route-map-section" style="margin-top: 60px;">
+          <div class="route-map-header" style="text-align: left; margin-bottom: 30px;">
+            <h2 class="route-map-title" style="font-size: 32px;">Follow the <span>Route</span></h2>
+            <p class="route-map-subtitle" style="margin: 0; max-width: 100%;">Explore your complete expedition route, including key destinations and scenic lakes.</p>
+          </div>
+
+          <div class="route-map-container" style="border-radius: 16px;">
+            <div class="directions-card" style="top: 20px; left: 20px; width: 280px; padding: 16px;">
+              <div class="directions-row">
+                <div class="directions-icon-column">
+                  <i class="fa-solid fa-location-arrow start-dot"></i>
+                  <div class="directions-line"></div>
+                  <i class="fa-solid fa-location-dot end-pin"></i>
+                </div>
+                <div class="directions-text-column">
+                  <div class="directions-place">Leh, Ladakh</div>
+                  <div class="directions-place">Hanle, Ladakh</div>
+                </div>
+              </div>
+              <div class="directions-divider"></div>
+              <div class="directions-meta">
+                <div class="meta-main">via Leh-Manali Hwy<span class="meta-dist">1,350 km</span></div>
+              </div>
+            </div>
+            <img src="assets/ladakh-route-map.png" alt="Ladakh Route Map" class="route-map-img">
+          </div>
+        </div>
+
+
       </div>
 
       <!-- RIGHT: Sticky inquire card -->
@@ -2143,28 +2174,13 @@
     <!-- Included & Excluded Section -->
     <div class="inc-exc-section">
       <div class="inc-exc-header">
-        <h2 class="inc-exc-title">What's <span>Included</span> &amp; <span>Excluded</span></h2>
-        <p class="inc-exc-subtitle">Know exactly what's covered in your adventure package and what you'll need to
-          arrange personally. We believe in transparent pricing with no hidden surprises.</p>
+        <h2 class="inc-exc-title" style="font-size:24px; margin-bottom: 8px;">What's <span>Included</span> &amp; <span>Excluded</span></h2>
       </div>
 
-      <div class="inc-exc-cards-container">
-        <!-- Card 1: Not Included -->
-        <div class="not-inc-card">
-          <h3 class="card-title">What's Not Included</h3>
-          <ul class="card-list">
-            <li>Personal Riding Gear</li>
-            <li>Alcoholic Beverages</li>
-            <li>Personal Shopping</li>
-            <li>Optional Activities</li>
-            <li>Personal Medical Expenses</li>
-            <li>Travel Delays Expenses</li>
-          </ul>
-        </div>
-
+      <div class="inc-exc-cards-container" style="flex-direction: column; gap: 20px;">
         <!-- Card 2: Included -->
-        <div class="inc-card">
-          <h3 class="card-title">What's Included</h3>
+        <div class="inc-card" style="width: 100%; margin: 0; padding: 24px;">
+          <h3 class="card-title" style="font-size: 20px; margin-bottom: 16px;">What's Included</h3>
           <ul class="card-list">
             <li>Motorcycle Rental &amp; Fuel</li>
             <li>3★ Accommodation</li>
@@ -2177,7 +2193,24 @@
             <li>Airport Pickup &amp; Drop</li>
           </ul>
         </div>
+
+        <!-- Card 1: Not Included -->
+        <div class="not-inc-card" style="width: 100%; margin: 0; padding: 24px;">
+          <h3 class="card-title" style="font-size: 20px; margin-bottom: 16px;">What's Not Included</h3>
+          <ul class="card-list">
+            <li>Personal Riding Gear</li>
+            <li>Alcoholic Beverages</li>
+            <li>Personal Shopping</li>
+            <li>Optional Activities</li>
+            <li>Personal Medical Expenses</li>
+            <li>Travel Delays Expenses</li>
+          </ul>
+        </div>
       </div>
+    </div>
+
+      </aside>
+
     </div>
 
     <!-- Day-by-Day Itinerary Section -->
@@ -2341,56 +2374,13 @@
       </div>
     </div>
 
-    <!-- Route Map Section -->
-    <div class="route-map-section">
-      <div class="route-map-header">
-        <h2 class="route-map-title">Follow the <span>Route to Adventure</span></h2>
-        <p class="route-map-subtitle">Explore your complete expedition route, including key destinations, iconic
-          mountain passes, scenic lakes, and daily riding distances from start to finish.</p>
-      </div>
-
-      <div class="route-map-container">
-        <!-- Floating Google Maps Directions style overlay card -->
-        <div class="directions-card">
-          <div class="directions-row">
-            <div class="directions-icon-column">
-              <i class="fa-solid fa-location-arrow start-dot"></i>
-              <div class="directions-line"></div>
-              <i class="fa-solid fa-location-dot end-pin"></i>
-            </div>
-            <div class="directions-text-column">
-              <div class="directions-place">Leh, Ladakh</div>
-              <div class="directions-place">Hanle, Ladakh</div>
-            </div>
-          </div>
-          <div class="directions-divider"></div>
-          <div class="directions-meta">
-            <div class="meta-main">via Leh-Manali Hwy and NH3 <span class="meta-dist">1,350 km</span></div>
-            <div class="meta-time">35 hr <span style="color:#666;font-weight:400">without traffic</span></div>
-          </div>
-        </div>
-
-        <img src="assets/ladakh-route-map.png" alt="Ladakh Expedition Route Map" class="route-map-img">
-
-        <!-- Google Maps controls style buttons overlay -->
-        <div class="map-controls">
-          <button class="map-control-btn" aria-label="Center map"><i class="fa-solid fa-crosshairs"></i></button>
-          <div class="zoom-controls">
-            <button class="map-control-btn" aria-label="Zoom in"><i class="fa-solid fa-plus"></i></button>
-            <button class="map-control-btn" aria-label="Zoom out"><i class="fa-solid fa-minus"></i></button>
-          </div>
-          <button class="map-control-btn" aria-label="Street view"><i class="fa-solid fa-street-view"></i></button>
-        </div>
-      </div>
-    </div>
-
     <!-- Accommodation Section -->
     <div class="stay-section">
       <div class="stay-header-row">
         <div class="stay-header-left">
           <h2 class="stay-title">Stay in Comfort, <span>Wake Up to Adventure</span></h2>
           <p class="stay-subtitle">Relax in carefully selected hotels, premium camps, and authentic mountain stays that
-            offer comfort, warm hospitality, and stunning views after every unforgettable day on the road.</p>
+            offer comfort, warm hospitality, and stunning views after every unforgettable day on the road. <em>(this or similar hotel based on availability)</em></p>
         </div>
         <div class="stay-nav-buttons">
           <button class="stay-nav-btn" aria-label="Previous stay"><i class="fa-solid fa-arrow-left"></i></button>
