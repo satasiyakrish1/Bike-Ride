@@ -23,26 +23,17 @@
   <link rel="stylesheet" href="index.css?v=6">
 
   <style>
-    /* ── Details Hero ── */
+    /* ── Details Hero (Gallery Style) ── */
     .detail-hero {
-      position: relative;
+      background: #fff;
+      padding-top: 20px;
       width: 100%;
-      min-height: 85vh;
-      background: linear-gradient(to bottom, rgba(12, 13, 14, 0.1) 0%, rgba(12, 13, 14, 0.5) 100%), url('assets/ladakh-hero-bg.png') no-repeat center center;
-      background-size: cover;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding-top: 100px;
-      /* offset navbar */
-      color: #fff;
     }
 
     .detail-hero-content {
-      max-width: 1200px;
-      margin: auto auto 40px;
-      padding: 0 5%;
-      text-align: center;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 10px 3% 0;
       width: 100%;
     }
 
@@ -52,12 +43,12 @@
       align-items: center;
       gap: 8px;
       font-size: 13px;
-      color: rgba(255, 255, 255, 0.55);
-      margin-bottom: 24px;
+      color: #6b7280;
+      margin-bottom: 16px;
     }
 
     .detail-breadcrumb a {
-      color: rgba(255, 255, 255, 0.55);
+      color: #6b7280;
       text-decoration: none;
       transition: color 0.2s;
     }
@@ -67,7 +58,7 @@
     }
 
     .detail-breadcrumb .sep {
-      color: rgba(255, 255, 255, 0.3);
+      color: #d1d5db;
       font-size: 11px;
     }
 
@@ -92,102 +83,224 @@
       justify-content: center;
     }
 
-    /* Titles */
-    .detail-hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 38px;
-      font-weight: 700;
-      color: #f97316;
-      margin-bottom: 12px;
-      letter-spacing: normal;
-      text-transform: none;
-    }
-
-    .detail-hero-subtitle {
-      font-family: 'Outfit', sans-serif;
-      font-size: 56px;
-      font-weight: 700;
-      line-height: 1.15;
-      margin-bottom: 40px;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-      text-transform: none;
-    }
-
-    /* 5-Column Stats Grid */
-    .detail-stats-grid {
-      background: transparent;
-      width: 100%;
-    }
-
-    .detail-stats-container {
-      max-width: 1200px;
-      margin: 0 auto;
+    /* Gallery Grid */
+    .hero-gallery {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: 1.2fr 1fr;
+      gap: 8px;
+      border-radius: 16px;
+      overflow: hidden;
+      height: 440px;
+      margin-bottom: 28px;
     }
 
-    .detail-stat-item {
-      padding: 30px 24px;
-      text-align: center;
+    .hero-gallery-main-wrapper {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
     }
 
-    .detail-stat-item::after {
-      content: '';
+    .hero-gallery-main {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-gallery-main-wrapper:hover .hero-gallery-main {
+      transform: scale(1.03);
+    }
+
+    .hero-gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .hero-gallery-thumb {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .hero-gallery-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-gallery-thumb:hover img {
+      transform: scale(1.05);
+    }
+
+    .hero-gallery-label {
       position: absolute;
-      right: 0;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.25) 50%, rgba(255, 255, 255, 0) 100%);
+      bottom: 12px;
+      left: 12px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-family: 'Outfit', sans-serif;
+      backdrop-filter: blur(4px);
+      transition: background 0.2s;
+      z-index: 2;
     }
 
-    .detail-stat-item:last-child::after {
+    .hero-gallery-thumb:hover .hero-gallery-label {
+      background: rgba(249, 115, 22, 0.9);
+    }
+
+    .hero-gallery-view-all {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: #fff;
+      color: #374151;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.2s;
+      z-index: 2;
+    }
+
+    .hero-gallery-view-all:hover {
+      background: #f3f4f6;
+      transform: translateY(-2px);
+    }
+
+    /* Hero Info Row */
+    .hero-info-row {
+      padding: 20px 0 18px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .detail-hero-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin: 0 0 14px 0;
+      line-height: 1.4;
+    }
+
+    /* Trip Meta Pills */
+    .hero-meta-pills {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+
+    .hero-meta-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #4b5563;
+      font-family: 'Outfit', sans-serif;
+      background: #f3f4f6;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid #e5e7eb;
+      line-height: 1;
+    }
+
+    .hero-meta-pill strong {
+      color: #111214;
+      font-weight: 700;
+      margin-left: 2px;
+    }
+
+    .hero-meta-pill i {
+      color: #f97316;
+      font-size: 12px;
+      width: 14px;
+      text-align: center;
+    }
+
+    .hero-duration-badge {
+      background: #f97316;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 100px;
+      font-family: 'Outfit', sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .hero-meta-sep {
       display: none;
     }
 
-    .stat-icon-wrapper {
-      position: relative;
-      font-size: 22px;
-      color: #ffffff;
-      margin-bottom: 14px;
+    /* Inclusions row */
+    .hero-inclusions-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      font-family: 'Outfit', sans-serif;
+      margin-top: 10px;
+    }
+
+    .hero-inclusion-item {
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-    }
-
-    .stat-icon-dot {
-      position: absolute;
-      bottom: -2px;
-      right: -6px;
-      width: 10px;
-      height: 10px;
-      background: #f97316;
-      border-radius: 50%;
-      border: 1.5px solid #0f1115;
-    }
-
-    .stat-label {
-      font-family: 'Playfair Display', serif;
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      margin-bottom: 6px;
-      text-transform: none;
-      letter-spacing: normal;
-    }
-
-    .stat-val {
-      font-family: 'Outfit', sans-serif;
+      gap: 8px;
       font-size: 13.5px;
-      font-weight: 400;
-      color: rgba(255, 255, 255, 0.7);
+      font-weight: 500;
+      color: #4b5563;
+      background: #f0fdf4;
+      padding: 6px 14px;
+      border-radius: 100px;
+      border: 1px solid #bbf7d0;
+      line-height: 1;
+    }
+
+    .hero-inclusion-item i {
+      color: #16a34a;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .hero-gallery {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+      .hero-gallery-main {
+        height: 260px;
+      }
+      .hero-gallery-grid {
+        grid-template-columns: 1fr 1fr;
+        height: 180px;
+      }
+      .hero-info-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .hero-inclusions-row {
+        flex-wrap: wrap;
+        gap: 16px;
+      }
     }
 
     /* ── Main Details Section ── */
@@ -272,6 +385,8 @@
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
       border: 1px solid #ebebeb;
       margin-top: 40px;
+      position: sticky;
+      top: 30px;
     }
 
     .price-row {
@@ -624,8 +739,8 @@
 
     /* ── Route Map Section ── */
     .route-map-section {
-      max-width: 1200px;
-      margin: 100px auto 0;
+      max-width: 300px;
+      margin: 80px auto 0;
       font-family: 'Outfit', sans-serif;
     }
 
@@ -666,7 +781,7 @@
 
     .route-map-img {
       width: 100%;
-      height: auto;
+      max-height: 560px;
       display: block;
       object-fit: cover;
     }
@@ -1999,54 +2114,59 @@
     <div class="detail-hero-content">
       <div class="detail-breadcrumb">
         <a href="index.html">Home</a>
-        <span class="sep">></span>
+        <span class="sep">&gt;</span>
         <span class="current">Trip Details <span class="detail-breadcrumb-badge"><i class="fa-solid fa-check"
               style="font-size:7px;color:#fff"></i></span></span>
       </div>
-      <p class="detail-hero-title">Ladakh Bike Expedition</p>
-      <h1 class="detail-hero-subtitle">Ride Across the Land of High Passes</h1>
-    </div>
 
-    <!-- 5-Column stats bar -->
-    <div class="detail-stats-grid">
-      <div class="detail-stats-container">
-        <!-- Stat 1 -->
-        <div class="detail-stat-item">
-          <div class="stat-icon-wrapper"><i class="fa-regular fa-hourglass-half"></i><span class="stat-icon-dot"></span>
+      <!-- Gallery Grid -->
+      <div class="hero-gallery">
+        <div class="hero-gallery-main-wrapper">
+          <img class="hero-gallery-main" src="assets/ladakh-hero-bg.png" alt="Ladakh Bike Expedition main photo">
+        </div>
+        <div class="hero-gallery-grid">
+          <div class="hero-gallery-thumb">
+            <img src="assets/spiti.png" alt="Destinations">
+            <span class="hero-gallery-label">Destinations</span>
           </div>
-          <p class="stat-label">Duration</p>
-          <p class="stat-val">7 Days / 6 Nights</p>
-        </div>
-        <!-- Stat 2 -->
-        <div class="detail-stat-item">
-          <div class="stat-icon-wrapper"><i class="fa-solid fa-location-dot"></i><span class="stat-icon-dot"></span>
+          <div class="hero-gallery-thumb">
+            <img src="assets/hotel-pool.png" alt="Stays">
+            <span class="hero-gallery-label">Stays</span>
           </div>
-          <p class="stat-label">Destination</p>
-          <p class="stat-val">Ladakh, India</p>
-        </div>
-        <!-- Stat 3 -->
-        <div class="detail-stat-item">
-          <div class="stat-icon-wrapper"><i class="fa-solid fa-gauge-simple-high"></i><span
-              class="stat-icon-dot"></span></div>
-          <p class="stat-label">Difficulty</p>
-          <p class="stat-val">Moderate to Challenging</p>
-        </div>
-        <!-- Stat 4 -->
-        <div class="detail-stat-item">
-          <div class="stat-icon-wrapper"><i class="fa-solid fa-motorcycle"></i><span class="stat-icon-dot"></span></div>
-          <p class="stat-label">Vehicle Type</p>
-          <p class="stat-val">Royal Enfield Himalayan 450</p>
-        </div>
-        <!-- Stat 5 -->
-        <div class="detail-stat-item">
-          <div class="stat-icon-wrapper"><i class="fa-solid fa-cloud-sun-rain"></i><span class="stat-icon-dot"></span>
+          <div class="hero-gallery-thumb">
+            <img src="assets/meghalaya.png" alt="Activity & Sightseeing">
+            <span class="hero-gallery-label">Activity & Sightseeing</span>
           </div>
-          <p class="stat-label">Best Season</p>
-          <p class="stat-val">May – September</p>
+          <div class="hero-gallery-thumb">
+            <img src="assets/gallery-main.png" alt="More photos">
+            <button class="hero-gallery-view-all"><i class="fa-regular fa-images"></i> View All Images</button>
+          </div>
         </div>
+      </div>
+
+      <!-- Info Row -->
+      <div class="hero-info-row">
+        <div>
+          <h1 class="detail-hero-title">Ladakh Bike Expedition | Group Tour Package</h1>
+          <div class="hero-meta-pills">
+            <span class="hero-duration-badge">7D/6N</span>
+            <span class="hero-meta-pill"><i class="fa-solid fa-plane-departure"></i> Depart At <strong>Leh</strong></span>
+            <span class="hero-meta-pill"><i class="fa-solid fa-road"></i> Days In <strong>4 Journey</strong></span>
+            <span class="hero-meta-pill"><i class="fa-solid fa-flag-checkered"></i> Ends in <strong>Leh</strong></span>
+            <span class="hero-meta-pill"><i class="fa-solid fa-motorcycle"></i> Ride on <strong>RE Himalayan</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Inclusions Row -->
+      <div class="hero-inclusions-row">
+        <span class="hero-inclusion-item"><i class="fa-solid fa-van-shuttle"></i> Transfer Included</span>
+        <span class="hero-inclusion-item"><i class="fa-solid fa-bed"></i> Stay Included</span>
+        <span class="hero-inclusion-item"><i class="fa-solid fa-utensils"></i> Meals Included</span>
       </div>
     </div>
   </section>
+
 
   <!-- MAIN BODY -->
   <main class="detail-body">
@@ -2080,38 +2200,6 @@
           <i class="fa-solid fa-star"></i>
           <span class="rating-text">4.7 <span class="rating-count">(650 Review)</span></span>
         </div>
-        </div>
-
-        <!-- Route Map Section (Moved to left) -->
-        <div class="route-map-section" style="margin-top: 60px;">
-          <div class="route-map-header" style="text-align: left; margin-bottom: 30px;">
-            <h2 class="route-map-title" style="font-size: 32px;">Follow the <span>Route</span></h2>
-            <p class="route-map-subtitle" style="margin: 0; max-width: 100%;">Explore your complete expedition route, including key destinations and scenic lakes.</p>
-          </div>
-
-          <div class="route-map-container" style="border-radius: 16px;">
-            <div class="directions-card" style="top: 20px; left: 20px; width: 280px; padding: 16px;">
-              <div class="directions-row">
-                <div class="directions-icon-column">
-                  <i class="fa-solid fa-location-arrow start-dot"></i>
-                  <div class="directions-line"></div>
-                  <i class="fa-solid fa-location-dot end-pin"></i>
-                </div>
-                <div class="directions-text-column">
-                  <div class="directions-place">Leh, Ladakh</div>
-                  <div class="directions-place">Hanle, Ladakh</div>
-                </div>
-              </div>
-              <div class="directions-divider"></div>
-              <div class="directions-meta">
-                <div class="meta-main">via Leh-Manali Hwy<span class="meta-dist">1,350 km</span></div>
-              </div>
-            </div>
-            <img src="assets/ladakh-route-map.png" alt="Ladakh Route Map" class="route-map-img">
-          </div>
-        </div>
-
-
       </div>
 
       <!-- RIGHT: Sticky inquire card -->
@@ -2174,7 +2262,8 @@
     <!-- Included & Excluded Section -->
     <div class="inc-exc-section">
       <div class="inc-exc-header">
-        <h2 class="inc-exc-title" style="font-size:24px; margin-bottom: 8px;">What's <span>Included</span> &amp; <span>Excluded</span></h2>
+        <h2 class="inc-exc-title" style="font-size:24px; margin-bottom: 8px;">What's <span>Included</span> &amp;
+          <span>Excluded</span></h2>
       </div>
 
       <div class="inc-exc-cards-container" style="flex-direction: column; gap: 20px;">
@@ -2207,10 +2296,6 @@
           </ul>
         </div>
       </div>
-    </div>
-
-      </aside>
-
     </div>
 
     <!-- Day-by-Day Itinerary Section -->
@@ -2374,13 +2459,43 @@
       </div>
     </div>
 
+    <!-- Route Map Section -->
+    <div class="route-map-section">
+      <div class="route-map-header">
+        <h2 class="route-map-title">Follow the <span>Route</span></h2>
+        <p class="route-map-subtitle">Explore your complete expedition route, including key destinations and scenic
+          lakes.</p>
+      </div>
+      <div class="route-map-container">
+        <div class="directions-card">
+          <div class="directions-row">
+            <div class="directions-icon-column">
+              <i class="fa-solid fa-location-arrow start-dot"></i>
+              <div class="directions-line"></div>
+              <i class="fa-solid fa-location-dot end-pin"></i>
+            </div>
+            <div class="directions-text-column">
+              <div class="directions-place">Leh, Ladakh</div>
+              <div class="directions-place">Hanle, Ladakh</div>
+            </div>
+          </div>
+          <div class="directions-divider"></div>
+          <div class="directions-meta">
+            <div class="meta-main">via Leh-Manali Hwy<span class="meta-dist">1,350 km</span></div>
+          </div>
+        </div>
+        <img src="assets/ladakh-route-map.png" alt="Ladakh Route Map" class="route-map-img">
+      </div>
+    </div>
+
     <!-- Accommodation Section -->
     <div class="stay-section">
       <div class="stay-header-row">
         <div class="stay-header-left">
           <h2 class="stay-title">Stay in Comfort, <span>Wake Up to Adventure</span></h2>
           <p class="stay-subtitle">Relax in carefully selected hotels, premium camps, and authentic mountain stays that
-            offer comfort, warm hospitality, and stunning views after every unforgettable day on the road. <em>(this or similar hotel based on availability)</em></p>
+            offer comfort, warm hospitality, and stunning views after every unforgettable day on the road. <em>(this or
+              similar hotel based on availability)</em></p>
         </div>
         <div class="stay-nav-buttons">
           <button class="stay-nav-btn" aria-label="Previous stay"><i class="fa-solid fa-arrow-left"></i></button>
